@@ -5,15 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strings"
-
-	"github.com/mariosnous/pokedex_cli/internal/pokeapi"
 )
-
-type config struct {
-	pokeapiClient    pokeapi.Client
-	nextLocationsURL *string
-	prevLocationsURL *string
-}
 
 func startRepl(cfg *config) {
 	reader := bufio.NewScanner(os.Stdin)
@@ -69,6 +61,21 @@ func getCommands() map[string]cliCommand {
 			name:        "explore <location_name>",
 			description: "Explore a location",
 			callback:    commandExplore,
+		},
+		"catch": {
+			name:        "catch <pokemon_name>",
+			description: "Attempt to catch a pokemon and add it to your pokedex",
+			callback:    commandCatch,
+		},
+		"inspect": {
+			name:        "inspect <pokemon_name>",
+			description: "View info about caught pokemon",
+			callback:    commandInspect,
+		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "View all caught pokemon",
+			callback:    commandPokedex,
 		},
 		"map": {
 			name:        "map",
